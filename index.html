@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Beauty Product Inventory Manager</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fdf3f7;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #c2185b, #e91e63);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            color: #777;
+            font-size: 16px;
+        }
+
+        .card p {
+            margin: 0;
+            color: #c2185b;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .form-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .form-section h2 {
+            margin-top: 0;
+            color: #c2185b;
+        }
+
+        .form {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto;
+            gap: 12px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        button {
+            border: none;
+            background: #c2185b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #ad1457;
+        }
+
+        .table-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+
+        .table-section h2 {
+            color: #c2185b;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #c2185b;
+            color: white;
+            padding: 14px;
+            text-align: center;
+        }
+
+        td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #fff7fa;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .in-stock {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .medium-stock {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .low-stock {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        @media (max-width: 800px) {
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .form {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>💄 Beauty Product Inventory Manager</h1>
+        <p>Manage your beauty products and inventory efficiently</p>
+    </header>
+
+    <div class="container">
+
+        <div class="summary">
+
+            <div class="card">
+                <h3>Total Products</h3>
+                <p id="totalProducts">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Items</h3>
+                <p id="totalItems">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Inventory Value</h3>
+                <p id="totalValue">₹0</p>
+            </div>
+
+        </div>
+
+        <div class="form-section">
+
+            <h2>➕ Add New Product</h2>
+
+            <div class="form">
+
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="Product Name"
+                >
+
+                <input
+                    type="text"
+                    id="category"
+                    placeholder="Category"
+                >
+
+                <input
+                    type="number"
+                    id="price"
+                    placeholder="Price"
+                >
+
+                <input
+                    type="number"
+                    id="quantity"
+                    placeholder="Quantity"
+                >
+
+                <button id="addProduct">
+                    Add Product
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="table-section">
+
+            <h2>📦 Product Inventory</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="productList">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <footer>
+        Beauty Product Inventory Manager | TypeScript Project
+    </footer>
+
+    <script src="dist/app.js"></script>
+
+</body>
+
+</html>
